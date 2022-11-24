@@ -22,28 +22,28 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $filter = new CustomersFilter();
-       
+
         $filterItems = $filter->transform($request);
 
         $includeInvoices = $request->query('includeInvoices');
 
 
-        $customers =  Customer::where($filterItems);
-    
+        $customers = Customer::where($filterItems);
+
         if ($includeInvoices) {
-            $customers = $customers->with('invoices');
+            $customers = $customers->with('invoice');
         }
-               
+
         return new CustomerCollection($customers->paginate()->appends($request->query()));
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -52,9 +52,8 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        
-        return new CustomerResource(Customer::create($request->all())); 
 
+        return new CustomerResource(Customer::create($request->all()));
     }
 
     /**
@@ -64,20 +63,16 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Customer $customer)
-    
     {
-        
+
         $includeInvoices = request()->query('includeInvoices');
 
-        if($includeInvoices){
-            
-            return new CustomerResource($customer->loadMissing('invoices'));
-                    
-        } 
+        if ($includeInvoices) {
+
+            return new CustomerResource($customer->loadMissing('invoice'));
+        }
 
         return new CustomerResource($customer);
-       
-     
     }
 
     /**
@@ -86,7 +81,7 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Update the specified resource in storage.

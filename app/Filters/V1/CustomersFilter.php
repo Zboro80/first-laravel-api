@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Filters\V1;
+
 use Illuminate\Http\Request;
 use App\Filters\ApiFilter;
 
-class CustomersFilter  extends ApiFilter {
+class CustomersFilter  extends ApiFilter
+{
 
-    protected $safeParms=[
+    protected $safeParms = [
 
         'name' => ['eq'],
         'type' => ['eq'],
@@ -19,7 +21,7 @@ class CustomersFilter  extends ApiFilter {
     ];
 
     protected $columnMap = [
-        
+
         'postalCode' => 'postal_code',
     ];
 
@@ -32,5 +34,4 @@ class CustomersFilter  extends ApiFilter {
         'gte' => '≥'
 
     ];
-
 }

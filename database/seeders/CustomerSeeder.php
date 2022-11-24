@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Customer;
+
 class CustomerSeeder extends Seeder
 {
     /**
@@ -18,25 +19,26 @@ class CustomerSeeder extends Seeder
             ->count(25)
             ->hasinvoice(10)
             ->create();
-        
+
         Customer::factory()
             ->count(100)
             ->hasinvoice(5)
             ->create();
-            
+
         Customer::factory()
             ->count(25)
             ->hasinvoice(3)
             ->create();
-            
+
         Customer::factory()
             ->count(5)
             ->hasinvoice(0)
             ->create();
-            
+
     }
     /**
      */
-    function __construct() {
+    function __construct()
+    {
     }
 }
